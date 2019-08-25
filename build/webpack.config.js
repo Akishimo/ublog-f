@@ -1,22 +1,25 @@
-const path = require('path');
+const path = require('path')
 const fs = require('fs')
-const webpack = require('webpack');
+const os = require('os')
+const webpack = require('webpack')
 
 const { VueLoaderPlugin } = require('vue-loader');
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const UglifyJsPlugin =require('uglifyjs-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-
 const PORTAL_BASE_PATH = './src/modules'
 const BUILD_ASSERT_PATH = 'assets'
 const assets = ['main.js']
 const entry = ['babel-polyfill']
+
 const lastArg = process.argv.pop()
-const directory = /^--MODULE=/.test(lastArg) ? lastArg.replace(/^--MODULE=/, '') : ''
+let directory = /^--MODULE=/.test(lastArg) ? lastArg.replace(/^--MODULE=/, '') : ''
+directory = directory || process.env.MODULE || ''
 
 if (!directory) {
-  console.info('Please use command like npm run dev -- --MODULE=<module>')
+  os.platform().toUpperCase().includes('WIN') ? console.info('Please use command like npm run dev -- --MODULE=<module>') :
+  console.info('Please use command like MODULE=<module> npm run dev') 
   process.exit()
 }
 
@@ -30,6 +33,7 @@ assets.forEach(function (asset) {
 })
 
 module.exports = {
+  context: path.resolve(__dirname, `../`),
   entry: entry,
   output: {
       path: path.resolve(__dirname, 'dist'),
