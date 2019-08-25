@@ -1,5 +1,5 @@
-import Vue from 'vue';
-import App from './App.vue';
+import Vue from 'vue'
+import App from './App'
 import VueRouter from 'vue-router'
 import routerConfig from './routers'
 
@@ -19,7 +19,7 @@ const router = new VueRouter({
 // })
 // router.start(App, '#app')
 
-const app = new Vue({
+new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
