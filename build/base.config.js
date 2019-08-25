@@ -55,6 +55,15 @@ module.exports = {
   module: {
     rules: [
         {
+          test: /\.(png|jpg|gif|svg)$/,
+          loader: 'file-loader',
+          options: {
+              name: '[name].[ext]?[hash]',
+              outputPath: './img',
+              publicPath: './img'
+          }
+        },
+        {
             test: /\.css$/,
             use: ExtractTextPlugin.extract({
               fallback: 'vue-style-loader',
@@ -92,15 +101,6 @@ module.exports = {
           use: ['babel-loader', 'eslint-loader'],
         },
         {
-          test: /\.(png|jpg|gif|svg)$/,
-          loader: 'file-loader',
-          options: {
-              name: '[name].[ext]?[hash]',
-              outputPath: './img',
-              publicPath: './img'
-          }
-        },
-        {
           test: /\.vue$/,
           loader: 'vue-loader',
           options: {
@@ -134,7 +134,7 @@ module.exports = {
 if (process.env.NODE_ENV === 'production') {
   module.exports.output.path = path.resolve(__dirname, `dist/${directory}/${BUILD_ASSERT_PATH}`)
   module.exports.output.publicPath = `./${BUILD_ASSERT_PATH}/`
-  module.exports.module.rules[3].options.publicPath = `./${BUILD_ASSERT_PATH}/img`
+  module.exports.module.rules[0].options.publicPath = `./${BUILD_ASSERT_PATH}/img`
   module.exports.plugins = (module.exports.plugins || []).concat([
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
