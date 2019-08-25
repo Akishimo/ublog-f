@@ -67,9 +67,25 @@ module.exports = {
             })
         },
         {
+          enforce: 'pre',
+          test: /\.js$/,
+          loader: 'eslint-loader',
+          exclude: /node_modules/,
+          options: {
+            cache: true,
+            formatter: require('eslint-friendly-formatter'),
+            emitWarning: false
+          }
+        },
+        {
           test: /\.js$/,
           loader: 'babel-loader',
           exclude: /node_modules/
+        },
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          use: ['babel-loader', 'eslint-loader'],
         },
         {
           test: /\.(png|jpg|gif|svg)$/,
