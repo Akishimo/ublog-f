@@ -6,7 +6,7 @@
 
 ## dev
 
-### win
+### Win
 
 ` npm run dev -- --MODULE=模块名 `
 
@@ -16,7 +16,7 @@
 
 ## build
 
-### win
+### Win
 
 ` npm run build -- --MODULE=模块名 `
 
