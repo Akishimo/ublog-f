@@ -1,12 +1,26 @@
 # ublog-f
 
 ## install
-npm install
+
+` npm install `
 
 ## dev
-npm run build -- --MODULE=模块名
 
+### win
+
+` npm run dev -- --MODULE=模块名 `
+
+### linux Mac
+
+` MODULE=模块名 npm run dev `
 
 ## build
-npm run build -- --MODULE=模块名
+
+### win
+
+` npm run build -- --MODULE=模块名 `
+
+### linux Mac
+
+` MODULE=模块名 npm run build `
 
