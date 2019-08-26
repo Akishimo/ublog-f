@@ -7,7 +7,6 @@
 </template>
 
 <script>
-
 import getData from '../../utils/util';
 
 export default {
@@ -28,10 +27,6 @@ export default {
 }
 </script>
 
-
 <style lang="less" scoped>
 @import './home.less';
 </style>
-
-
-
