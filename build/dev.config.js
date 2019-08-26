@@ -1,10 +1,27 @@
 'use strict'
-// const webpack = require('webpack')
+const path = require('path')
 const merge = require('webpack-merge')
-// const path = require('path')
-const baseConfig = require('./base.config')
-// const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const devConfig = merge(baseConfig, {})
+const baseConfig = require('./base.config')
+
+const devConfig = merge(baseConfig, {
+  output: {
+    path: path.resolve(__dirname, '../dist'),
+    publicPath: '/',
+    filename: '[name].[hash].js'
+  },
+  devServer: {
+    historyApiFallback: true,
+    overlay: true
+  },
+  devtool: 'cheap-module-eval-source-map',
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: './index.ejs'
+    })
+  ]
+})
 
 module.exports = devConfig
