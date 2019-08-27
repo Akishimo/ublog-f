@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --progress --config build/dev.config.js --hot",
     "build": "cross-env NODE_ENV=production webpack --config build/build.config.js --progress --hide-modules",
-    "mocks": "nodemon -w ./mocks build/mock-server.js"
+    "mocks": "nodemon mocker/server.js"
   },
   "keywords": [
     "blog"
@@ -39,6 +39,7 @@
     "eslint-plugin-vue": "^5.2.3",
     "file-loader": "^4.2.0",
     "html-webpack-plugin": "^3.2.0",
+    "klaw": "^3.0.0",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
     "mini-css-extract-plugin": "^0.7.0",
