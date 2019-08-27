@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs')
+const os = require('os')
 
 const { DEFAULT_ENTRIES, ASSETS, PORTAL_BASE_PATH } = require('./config')
 
