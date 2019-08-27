@@ -7,7 +7,18 @@
 </template>
 
 <script>
-import getData from '../../utils/util';
+import API from '@/common/api'
+
+const getData = async (vm) => {
+  const response = await API.call({
+    method: 'get',
+    url: '/common/index/',
+    data: {
+      ts: 123
+    }
+  })
+  return response.data
+}
 
 export default {
   data () {
@@ -15,15 +26,11 @@ export default {
       msg: 'Welcome to Your Vue.js'
     }
   },
-  created() {
-    this.fetchData();
+  async created() {
+    const data = await getData(this)
+    this.msg = data.a
   },
-  methods: {
-    async fetchData() {
-      const data = await getData();
-      this.msg = data;
-    }
-  }
+  methods: {}
 }
 </script>
 

@@ -2,7 +2,10 @@ import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
 import routerConfig from './routers'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
+Vue.use(VueAxios, axios)
 Vue.use(VueRouter)
 
 const router = new VueRouter({

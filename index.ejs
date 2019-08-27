@@ -7,9 +7,10 @@
     <meta content="telephone=no,email=no" name="format-detection">
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
+    <% const prefix = process.env.NODE_ENV === 'development' ? './src/static' : './assets/static' %>
+    <link rel="stylesheet" type="text/css" href="<%= prefix %>/a.css" />
   </head>
   <body>
-    <div></div>
     <div id="app"></div>
   </body>
 </html>
