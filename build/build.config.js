@@ -12,11 +12,14 @@ const baseConfig = require('./base.config')
 
 const devConfig = merge(baseConfig, {
   output: {
-    filename: '[name].[chunkhash].js',
+    filename: 'js/[name].[chunkhash].js',
     path: path.resolve(__dirname, `../dist/${moduleName}/${BUILD_ASSERT_PATH}`),
     publicPath: `./${BUILD_ASSERT_PATH}/`
   },
-  devtool: 'cheap-module-source-map',
+  devtool: false,
+  performance: {
+    hints: false
+  },
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.optimize.SplitChunksPlugin({

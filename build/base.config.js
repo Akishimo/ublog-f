@@ -1,8 +1,10 @@
 const path = require('path')
 
+const webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin =require('uglifyjs-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const { entries } = require('./utils')
 const { FILE_PUBLIC_PATH, CSS_HMR } = require('./config')
@@ -13,7 +15,8 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue'],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+      'vue$': 'vue/dist/vue.esm.js',
+      '@': path.resolve(__dirname, `../src`)
     }
   },
   mode: process.env.NODE_ENV,
@@ -68,13 +71,20 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash:8].css'
-    })
+      filename: 'css/[name].[contenthash:8].css'
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../src/static'),
+        to: 'static'
+      }
+    ])
   ],
   optimization: {
     minimizer: [
       new UglifyJsPlugin({
         uglifyOptions: {
+          warnings: false,
           compress: false
         }
       })
