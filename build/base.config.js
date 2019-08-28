@@ -1,13 +1,32 @@
 const path = require('path')
 
-const webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const UglifyJsPlugin =require('uglifyjs-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const StyleLintPlugin = require('stylelint-webpack-plugin')
 
 const { entries } = require('./utils')
-const { FILE_PUBLIC_PATH, CSS_HMR } = require('./config')
+const { BUILD } = require('../config/index')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+const genHtmlConfig = () => {
+  const plugins = []
+  Object.keys(entries).forEach((key) => {
+    plugins.push(
+      new HtmlWebpackPlugin({
+        chunks: [key, 'manifest', 'vendor', 'commons'],
+        filename: BUILD.GET_HTML_PATH(key),
+        template: './index.ejs',
+        minify: {
+          collapseWhitespace: true
+        }
+      })
+    )
+  })
+
+  return plugins
+}
 
 module.exports = {
   context: path.resolve(__dirname, `../`),
@@ -16,7 +35,8 @@ module.exports = {
     extensions: ['.js', '.vue'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      '@': path.resolve(__dirname, `../src`)
+      '@': path.resolve(__dirname, `../src`),
+      'R': path.resolve(__dirname, `../`)
     }
   },
   mode: process.env.NODE_ENV,
@@ -29,8 +49,8 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              hmr: CSS_HMR
-            },
+              hmr: BUILD.CSS_HMR
+            }
           },
           'css-loader',
           'less-loader'
@@ -38,11 +58,11 @@ module.exports = {
       },
       {
         enforce: 'pre',
-        test: /\.js$/,
+        test: /\.(js|vue)$/,
         loader: 'eslint-loader',
         exclude: /node_modules/,
         options: {
-          cache: true,
+          // cache: true,
           formatter: require('eslint-friendly-formatter'),
           emitWarning: false
         }
@@ -60,10 +80,10 @@ module.exports = {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'url-loader',
         options: {
-            name: '[name].[ext]?[hash]',
-            limit: 10000,
-            outputPath: './img',
-            publicPath: FILE_PUBLIC_PATH
+          name: '[name].[ext]?[hash]',
+          limit: 10000,
+          outputPath: './img',
+          publicPath: BUILD.FILE_PUBLIC_PATH
         }
       }
     ]
@@ -76,9 +96,15 @@ module.exports = {
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../src/static'),
-        to: 'static'
+        to: 'static',
+        ignore: BUILD.COPY_PLUGIN_IGN
       }
-    ])
+    ]),
+    new StyleLintPlugin({
+      configFile: '.stylelintrc.js',
+      files: '**/*.((le|c)ss|vue)'
+    }),
+    ...genHtmlConfig()
   ],
   optimization: {
     minimizer: [
@@ -90,4 +116,4 @@ module.exports = {
       })
     ]
   }
-};
+}
