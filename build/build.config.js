@@ -2,19 +2,16 @@
 const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
-
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const { moduleName } = require('./utils')
-const { BUILD_ASSERT_PATH } = require('./config')
+const { BUILD } = require('../config/index')
 const baseConfig = require('./base.config')
 
 const devConfig = merge(baseConfig, {
   output: {
-    filename: 'js/[name].[chunkhash].js',
-    path: path.resolve(__dirname, `../dist/${moduleName}/${BUILD_ASSERT_PATH}`),
-    publicPath: `./${BUILD_ASSERT_PATH}/`
+    filename: 'js/[name].[chunkhash:8].js',
+    path: path.resolve(__dirname, `../dist/${BUILD.BUILD_ASSERT_PATH}`),
+    publicPath: `./${BUILD.BUILD_ASSERT_PATH}/`
   },
   devtool: false,
   performance: {
@@ -27,9 +24,9 @@ const devConfig = merge(baseConfig, {
         default: {
           minChunks: 2,
           priority: -20,
-          reuseExistingChunk: true,
+          reuseExistingChunk: true
         },
-        //打包重复出现的代码
+        // 打包重复出现的代码
         vendor: {
           chunks: 'initial',
           minChunks: 2,
@@ -37,7 +34,7 @@ const devConfig = merge(baseConfig, {
           minSize: 0,
           name: 'vendor'
         },
-        //打包第三方类库
+        // 打包第三方类库
         commons: {
           name: 'commons',
           chunks: 'initial',
@@ -47,10 +44,6 @@ const devConfig = merge(baseConfig, {
     }),
     new webpack.optimize.RuntimeChunkPlugin({
       name: 'manifest'
-    }),
-    new HtmlWebpackPlugin({
-      filename: '../index.html',
-      template: './index.ejs'
     })
   ]
 })

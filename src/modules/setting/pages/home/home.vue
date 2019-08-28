@@ -23,7 +23,7 @@ const getData = async (vm) => {
 export default {
   data () {
     return {
-      msg: 'Welcome to Your Vue.js index'
+      msg: 'Welcome to Your Vue.js index2'
     }
   },
   async created () {
