@@ -4,6 +4,7 @@ const express = require('express')
 const apiMocker = require('mocker-api')
 
 const app = express()
+const { MOCKER: CONFIG } = require('../config/index')
 const apiDir = path.resolve(__dirname, `./apis`)
 
 const getApis = () => {
@@ -21,6 +22,6 @@ const getApis = () => {
 
 getApis().then((apiFiles) => {
   apiMocker(app, apiFiles)
-  app.listen(4004);
-  console.log('=> http://localhost:8080')
+  app.listen(CONFIG.MOCK_PORT)
+  console.log(`mocker run at http://localhost:${CONFIG.MOCK_PORT}`)
 })
