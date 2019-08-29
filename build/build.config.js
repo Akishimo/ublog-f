@@ -7,7 +7,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { BUILD } = require('../config/index')
 const baseConfig = require('./base.config')
 
-const devConfig = merge(baseConfig, {
+const buildConfig = merge(baseConfig, {
   output: {
     filename: 'js/[name].[chunkhash:8].js',
     path: path.resolve(__dirname, `../dist/${BUILD.BUILD_ASSERT_PATH}`),
@@ -48,4 +48,9 @@ const devConfig = merge(baseConfig, {
   ]
 })
 
-module.exports = devConfig
+if (process.env.npm_config_report) {
+  const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+  buildConfig.plugins.push(new BundleAnalyzerPlugin())
+}
+
+module.exports = buildConfig

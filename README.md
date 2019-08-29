@@ -24,7 +24,7 @@
 
 ` MODULE=name npm run build `
 
-> 以上命令中的 `name` 为 `src/modules` 下模块的名, 如果要一次构建 `modules` 下所有模块,请将 `name` 改为 `all`
+> 以上命令中的 `name` 为 `src/modules` 下模块的名, 如果要一次构建 `modules` 下所有模块,请将 `name` 改为 `all`. 本命令后面添加 ` --report ` 可以显示详细的 chunk 报告.
 
 ## command
 
