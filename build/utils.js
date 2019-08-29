@@ -4,6 +4,17 @@ const os = require('os')
 
 const { BUILD } = require('../config/index')
 
+const buildEntries = (moduleName, entries) => {
+  BUILD.ASSETS.forEach(function (asset) {
+    if (fs.existsSync(path.join(BUILD.PORTAL_BASE_PATH, moduleName, asset))) {
+      entries[moduleName].push([BUILD.PORTAL_BASE_PATH, moduleName, asset].join('/'))
+    } else {
+      console.info(`Cannot found ${moduleName} module`)
+      process.exit()
+    }
+  })
+}
+
 const moduleName = (() => {
   const lastArg = process.argv.pop()
   let directory = /^--MODULE=/.test(lastArg) ? lastArg.replace(/^--MODULE=/, '') : ''
@@ -28,26 +39,12 @@ const entries = (() => {
       let stat = fs.lstatSync(currentPath)
       if (stat.isDirectory()) {
         entries[dir] = [BUILD.DEFAULT_ENTRIES]
-        BUILD.ASSETS.forEach(function (asset) {
-          if (fs.existsSync(path.join(BUILD.PORTAL_BASE_PATH, dir, asset))) {
-            entries[dir].push([BUILD.PORTAL_BASE_PATH, dir, asset].join('/'))
-          } else {
-            console.info(`Cannot found ${moduleName} module`)
-            process.exit()
-          }
-        })
+        buildEntries(dir, entries)
       }
     })
   } else {
     entries[moduleName] = [BUILD.DEFAULT_ENTRIES]
-    BUILD.ASSETS.forEach(function (asset) {
-      if (fs.existsSync(path.join(BUILD.PORTAL_BASE_PATH, moduleName, asset))) {
-        entries[moduleName].push([BUILD.PORTAL_BASE_PATH, moduleName, asset].join('/'))
-      } else {
-        console.info(`Cannot found ${moduleName} module`)
-        process.exit()
-      }
-    })
+    buildEntries(moduleName, entries)
   }
 
   return entries
