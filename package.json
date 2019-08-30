@@ -11,7 +11,7 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --progress --config build/dev.config.js --hot",
     "build": "cross-env NODE_ENV=production webpack --config build/build.config.js --progress --hide-modules",
     "mocker": "nodemon mocker/server.js",
-    "dm": "npm run dev & npm run mocker",
+    "dm": "npm run mocker & npm run dev",
     "lintjs": "eslint --ext .js --ext .vue --format 'node_modules/eslint-friendly-formatter' ./",
     "lintcss": "stylelint **/*.less **/*.css **/*.vue",
     "lint": "npm run lintjs & npm run lintcss"

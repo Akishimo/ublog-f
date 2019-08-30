@@ -13,7 +13,8 @@ module.exports = {
     GET_HTML_PATH: (key) => {
       return isDev ? `${key}.html` : `../${key}.html`
     },
-    COPY_PLUGIN_IGN: isDev ? [] : ['dev/**/*']
+    COPY_PLUGIN_IGN: isDev ? [] : ['dev/**/*'],
+    STATIC_PATH: isDev ? './src/static' : './assets/static'
   },
   MOCKER: {
     MOCK_PORT: 4040
