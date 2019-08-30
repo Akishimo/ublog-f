@@ -4,7 +4,9 @@ import env from './env'
 class API_WRAPPER {
   constructor (envType) {
     const prefix = env[envType].apiDomain
-    Vue.axios.defaults.baseURL = prefix
+    setTimeout(() => {
+      Vue.axios.defaults.baseURL = prefix // api 初始化时 axios 尚未 use 完成
+    })
   }
 
   call (currentParams) {

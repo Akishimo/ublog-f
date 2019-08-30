@@ -1,5 +1,6 @@
 const path = require('path')
 
+const webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
@@ -15,7 +16,7 @@ const genHtmlConfig = () => {
   Object.keys(entries).forEach((key) => {
     plugins.push(
       new HtmlWebpackPlugin({
-        chunks: [key, 'manifest', 'vendor', 'commons'],
+        chunks: [key, 'manifest', 'common', 'common[vue]'],
         filename: BUILD.GET_HTML_PATH(key),
         template: './index.ejs',
         minify: {
@@ -103,6 +104,11 @@ module.exports = {
     new StyleLintPlugin({
       configFile: '.stylelintrc.js',
       files: '**/*.((le|c)ss|vue)'
+    }),
+    new webpack.DefinePlugin({
+      'window.GLOABLE_CONFIG': JSON.stringify({
+        STATIC_PATH: BUILD.STATIC_PATH
+      })
     }),
     ...genHtmlConfig()
   ],

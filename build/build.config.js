@@ -1,5 +1,6 @@
 'use strict'
 const path = require('path')
+
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
@@ -19,36 +20,33 @@ const buildConfig = merge(baseConfig, {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new webpack.optimize.SplitChunksPlugin({
+    new webpack.optimize.RuntimeChunkPlugin({
+      name: 'manifest'
+    })
+  ],
+  optimization: {
+    splitChunks: {
       cacheGroups: {
-        default: {
-          minChunks: 2,
-          priority: -20,
-          reuseExistingChunk: true
-        },
-        // 打包重复出现的代码
         vendor: {
           chunks: 'initial',
           minChunks: 2,
           maxInitialRequests: 5,
-          minSize: 0,
-          name: 'vendor'
+          minSize: 5000,
+          name: 'common',
+          priority: 1
         },
-        // 打包第三方类库
-        commons: {
-          name: 'commons',
+        commonChuncksForVue: {
           chunks: 'initial',
-          minChunks: Infinity
+          test: (module, chunks) => /vue/.test(module.context),
+          name: 'common[vue]',
+          priority: 2
         }
       }
-    }),
-    new webpack.optimize.RuntimeChunkPlugin({
-      name: 'manifest'
-    })
-  ]
+    }
+  }
 })
 
-if (process.env.npm_config_report) {
+if (process.env.npm_config_analyze) {
   const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
   buildConfig.plugins.push(new BundleAnalyzerPlugin())
 }
