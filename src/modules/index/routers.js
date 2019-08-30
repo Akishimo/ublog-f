@@ -1,10 +1,10 @@
+import home from './pages/home/home'
+
 const routers = [
   {
     path: '/home',
     name: 'home',
-    component (resolve) {
-      require(['./pages/home/home'], resolve)
-    }
+    component: home
   }
 ]
 
