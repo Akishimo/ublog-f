@@ -1,0 +1,4 @@
+{
+  "watch": ["mocker/apis"],
+  "ext": ".js"
+}
