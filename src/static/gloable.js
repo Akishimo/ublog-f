@@ -1,3 +1,3 @@
 window.onload = () => {
-  window.particlesJS.load('pt-bg', `${window._GLOABLE.STATIC_PATH}/particles.json`, () => {})
+  window.particlesJS.load('pt-bg', `${window._GLOABLE.SERVER_STATIC_PATH}/particles.json`, () => {})
 }

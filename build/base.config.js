@@ -4,7 +4,6 @@ const webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
 
 const { entries } = require('./utils')
@@ -94,20 +93,13 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash:8].css'
     }),
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, '../src/static'),
-        to: 'static',
-        ignore: BUILD.COPY_PLUGIN_IGN
-      }
-    ]),
     new StyleLintPlugin({
       configFile: '.stylelintrc.js',
       files: '**/*.((le|c)ss|vue)'
     }),
     new webpack.DefinePlugin({
       'window.GLOABLE_CONFIG': JSON.stringify({
-        STATIC_PATH: BUILD.STATIC_PATH
+        SERVER_STATIC_PATH: BUILD.SERVER_STATIC_PATH
       })
     }),
     ...genHtmlConfig()

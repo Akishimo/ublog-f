@@ -1,6 +1,7 @@
 'use strict'
 const merge = require('webpack-merge')
 const portfinder = require('portfinder')
+const path = require('path')
 
 const baseConfig = require('./base.config')
 const { BUILD, MOCKER } = require('../config/index')
@@ -14,13 +15,14 @@ const devConfig = merge(baseConfig, {
     overlay: true,
     compress: true,
     // quiet: true,
+    contentBase: BUILD.LOCAL_STATIC_PATH,
     port: BUILD.DEV_PORT,
     open: true,
     clientLogLevel: 'none',
     watchOptions: {
       poll: true
     },
-    openPage: 'static/dev/webpack-dev-server.html',
+    openPage: 'dev/webpack-dev-server.html',
     proxy: {
       '/api': {
         target: `http://localhost:${MOCKER.MOCK_PORT}`,

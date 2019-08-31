@@ -7,7 +7,7 @@
     <meta content="telephone=no,email=no" name="format-detection">
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
-    <link rel="stylesheet" type="text/css" href="<%= window.GLOABLE_CONFIG.STATIC_PATH %>/gloable.css" />
+    <link rel="stylesheet" type="text/css" href="<%= window.GLOABLE_CONFIG.SERVER_STATIC_PATH %>/gloable.css" />
     <script>
       window._GLOABLE = <%= JSON.stringify(window.GLOABLE_CONFIG) %>
     </script>
@@ -16,6 +16,6 @@
     <div id="pt-bg"></div>
     <div id="app"></div>
   </body>
-  <script src="<%= window.GLOABLE_CONFIG.STATIC_PATH %>/lib/particles.min.js"></script>
-  <script src="<%= window.GLOABLE_CONFIG.STATIC_PATH %>/gloable.js"></script>
+  <script src="<%= window.GLOABLE_CONFIG.SERVER_STATIC_PATH %>/lib/particles.min.js"></script>
+  <script src="<%= window.GLOABLE_CONFIG.SERVER_STATIC_PATH %>/gloable.js"></script>
 </html>
