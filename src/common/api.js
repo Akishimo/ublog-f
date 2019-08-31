@@ -3,13 +3,23 @@ import env from './env'
 
 class API_WRAPPER {
   constructor (envType) {
-    const prefix = env[envType].apiDomain
-    setTimeout(() => {
-      Vue.axios.defaults.baseURL = prefix // api 初始化时 axios 尚未 use 完成
-    })
+    this.prefix = env[envType].apiDomain
+    this.setPrefix = (delay = false) => {
+      if ('axios' in Vue && Vue.axios.defaults.baseURL !== this.prefix) {
+        if (delay) {
+          setTimeout(() => {
+            Vue.axios.defaults.baseURL = this.prefix
+          })
+        } else {
+          Vue.axios.defaults.baseURL = this.prefix
+        }
+      }
+    }
+    this.setPrefix(true)
   }
 
   call (currentParams) {
+    this.setPrefix()
     return Vue.axios(currentParams)
   }
 }
