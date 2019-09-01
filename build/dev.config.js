@@ -1,7 +1,6 @@
 'use strict'
 const merge = require('webpack-merge')
 const portfinder = require('portfinder')
-const path = require('path')
 
 const baseConfig = require('./base.config')
 const { BUILD, MOCKER } = require('../config/index')

@@ -13,8 +13,12 @@
     </script>
   </head>
   <body>
-    <div id="pt-bg"></div>
-    <div id="app"></div>
+    <div id="pt-bg" class="absolute"></div>
+    <div class="absolute block-event">
+      <div class="allow-event">
+        <div id="app"></div>
+      </div>
+    </div>
   </body>
   <script src="<%= window.GLOABLE_CONFIG.SERVER_STATIC_PATH %>/lib/particles.min.js"></script>
   <script src="<%= window.GLOABLE_CONFIG.SERVER_STATIC_PATH %>/gloable.js"></script>

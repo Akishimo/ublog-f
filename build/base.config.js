@@ -7,7 +7,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
 
 const { entries } = require('./utils')
-const { BUILD } = require('../config/index')
+const { BUILD, STATIC } = require('../config/index')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const genHtmlConfig = () => {
@@ -99,7 +99,8 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'window.GLOABLE_CONFIG': JSON.stringify({
-        SERVER_STATIC_PATH: BUILD.SERVER_STATIC_PATH
+        SERVER_STATIC_PATH: BUILD.SERVER_STATIC_PATH,
+        STATIC_CONFIG: STATIC
       })
     }),
     ...genHtmlConfig()
