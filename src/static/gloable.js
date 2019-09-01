@@ -18,6 +18,11 @@ const throttle = window.throttle = function(func, delay) {
       }
   }
 }
+window.setAutoBg = (delay = 10000) => {
+  setInterval(() => {
+    setRandomBg()
+  }, delay)
+}
 
 window.onload = () => {
   window.particlesJS.load('pt-bg', `${path}/particles.json`, () => {})
