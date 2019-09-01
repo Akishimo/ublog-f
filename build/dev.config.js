@@ -14,20 +14,25 @@ const devConfig = merge(baseConfig, {
     overlay: true,
     compress: true,
     // quiet: true,
+    contentBase: BUILD.LOCAL_STATIC_PATH,
     port: BUILD.DEV_PORT,
     open: true,
     clientLogLevel: 'none',
     watchOptions: {
       poll: true
     },
-    openPage: 'static/dev/webpack-dev-server.html',
+    openPage: 'dev/webpack-dev-server.html',
     proxy: {
       '/api': {
         target: `http://localhost:${MOCKER.MOCK_PORT}`,
         pathRewrite: { '^/api': '' },
         changeOrigin: true
       }
-    }
+    },
+    allowedHosts: [
+      'ublog-b.com'
+    ],
+    // clientLogLevel: 'error'
   },
   devtool: BUILD.DEVTOOL
 })

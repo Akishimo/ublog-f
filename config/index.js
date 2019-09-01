@@ -1,3 +1,4 @@
+const path = require('path')
 const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
@@ -13,10 +14,15 @@ module.exports = {
     GET_HTML_PATH: (key) => {
       return isDev ? `${key}.html` : `../${key}.html`
     },
-    COPY_PLUGIN_IGN: isDev ? [] : ['dev/**/*'],
-    STATIC_PATH: isDev ? './src/static' : './assets/static'
+    COPY_PLUGIN_IGN: isDev ? [] : ['dev/**/*'], // 不复制的静态资源路径
+    SERVER_STATIC_PATH: isDev ? '.' : './assets/static', // 服务器展示的静态资源根地址
+    LOCAL_STATIC_PATH: path.resolve(__dirname, '../src/static') // 静态文件的本地完整路径
   },
   MOCKER: {
     MOCK_PORT: 4040
+  },
+  STATIC: {
+    IMAGE_AMOUNT: 8,
+    FIXED_IMAGE_INDEX: 4
   }
 }

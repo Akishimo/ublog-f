@@ -8,13 +8,14 @@
   },
   "main": "webpack.config.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --progress --config build/dev.config.js --hot",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --progress --config build/dev.config.js",
     "build": "cross-env NODE_ENV=production webpack --config build/build.config.js --progress --hide-modules",
     "mocker": "nodemon mocker/server.js",
     "dm": "npm run mocker & npm run dev",
     "lintjs": "eslint --ext .js --ext .vue --format 'node_modules/eslint-friendly-formatter' ./",
     "lintcss": "stylelint **/*.less **/*.css **/*.vue",
-    "lint": "npm run lintjs & npm run lintcss"
+    "lint": "npm run lintjs & npm run lintcss",
+    "killmocker": "./kill.sh 4040"
   },
   "keywords": [
     "blog"

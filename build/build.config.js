@@ -6,6 +6,7 @@ const merge = require('webpack-merge')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const { BUILD } = require('../config/index')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const baseConfig = require('./base.config')
 
 const buildConfig = merge(baseConfig, {
@@ -22,7 +23,14 @@ const buildConfig = merge(baseConfig, {
     new CleanWebpackPlugin(),
     new webpack.optimize.RuntimeChunkPlugin({
       name: 'manifest'
-    })
+    }),
+    new CopyWebpackPlugin([ // dev模式采用 contentBase 指定静态资源
+      {
+        from: BUILD.LOCAL_STATIC_PATH,
+        to: 'static',
+        ignore: BUILD.COPY_PLUGIN_IGN
+      }
+    ])
   ],
   optimization: {
     splitChunks: {
