@@ -76,6 +76,7 @@ const init = () => {
   setRandomBg(window._GLOABLE.STATIC_CONFIG.FIXED_IMAGE_INDEX, false)
   initListener()
   initNotice()
+  // setAutoBg(3000)
 }
 
 init()

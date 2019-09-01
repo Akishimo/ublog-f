@@ -28,7 +28,11 @@ const devConfig = merge(baseConfig, {
         pathRewrite: { '^/api': '' },
         changeOrigin: true
       }
-    }
+    },
+    allowedHosts: [
+      'ublog-b.com'
+    ],
+    // clientLogLevel: 'error'
   },
   devtool: BUILD.DEVTOOL
 })
