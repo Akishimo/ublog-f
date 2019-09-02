@@ -31,3 +31,9 @@
 ` npm run lint ` 同时检查以上两种
 
 > 暂不支持 Windows 系统
+
+## change background
+* ` shift + c` 切换背景壁纸(2s 内多次切换只有一次有效),
+* console 运行 `setAutoBg(间隔毫秒数)` 可自动切换壁纸.
+* console 运行 `setBgChangeMode('random' 或 'order')` 可以改变背景切换模式为随机或按顺序 (默认为 `random`)
+
