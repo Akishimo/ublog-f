@@ -7,7 +7,9 @@
     <meta content="telephone=no,email=no" name="format-detection">
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
-    <link rel="stylesheet" type="text/css" href="<%= window.GLOABLE_CONFIG.SERVER_STATIC_PATH %>/gloable.css" />
+    <link rel="icon" href="/ublog.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/ublog.ico" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="<%= window.GLOABLE_CONFIG.SERVER_STATIC_SRC_PATH %>/gloable.css" />
     <script>
       window._GLOABLE = <%= JSON.stringify(window.GLOABLE_CONFIG) %>
     </script>
@@ -20,6 +22,6 @@
       </div>
     </div>
   </body>
-  <script src="<%= window.GLOABLE_CONFIG.SERVER_STATIC_PATH %>/lib/particles.min.js"></script>
-  <script src="<%= window.GLOABLE_CONFIG.SERVER_STATIC_PATH %>/gloable.js"></script>
+  <script src="<%= window.GLOABLE_CONFIG.SERVER_STATIC_ROOT_PATH %>/lib/particles.min.js"></script>
+  <script src="<%= window.GLOABLE_CONFIG.SERVER_STATIC_SRC_PATH %>/gloable.js"></script>
 </html>
