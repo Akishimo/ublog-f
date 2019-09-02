@@ -48,10 +48,17 @@ const outputLib = (cb) => {
   cb()
 }
 
+const outputIcon = (cb) => {
+  gulp.src('../**/*.ico')
+    .pipe(gulp.dest('../dist'))
+  cb()
+}
+
 module.exports = {
   outputJs,
   outputCss,
   outputImages,
   outputJson,
-  outputLib
+  outputLib,
+  outputIcon
 }
