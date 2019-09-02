@@ -1,6 +1,8 @@
 const gulp = require('gulp')
 const uglify = require('gulp-uglify')
 const babel = require('gulp-babel')
+const imagemin = require('gulp-imagemin')
+const cleanCSS = require('gulp-clean-css')
 // const gutil = require('gulp-util')
 
 const outputJs = (cb) => {
@@ -17,7 +19,8 @@ const outputJs = (cb) => {
 }
 
 const outputCss = (cb) => {
-  gulp.src('../src/gloable.css')
+  gulp.src('../src/**/*.css')
+    .pipe(cleanCSS({ compatibility: 'ie9' }))
     .pipe(gulp.dest('../dist'))
   cb()
 }
@@ -30,6 +33,11 @@ const outputJson = (cb) => {
 
 const outputImages = (cb) => {
   gulp.src('../images/**/*', { base: '../' })
+    .pipe(imagemin([
+      imagemin.gifsicle({ interlaced: true }),
+      imagemin.jpegtran({ progressive: true }),
+      imagemin.optipng({ optimizationLevel: 5 })
+    ]))
     .pipe(gulp.dest('../dist'))
   cb()
 }
