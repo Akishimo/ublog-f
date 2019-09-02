@@ -14,9 +14,11 @@ module.exports = {
     GET_HTML_PATH: (key) => {
       return isDev ? `${key}.html` : `../${key}.html`
     },
-    COPY_PLUGIN_IGN: isDev ? [] : ['dev/**/*'], // 不复制的静态资源路径
-    SERVER_STATIC_PATH: isDev ? '.' : './assets/static', // 服务器展示的静态资源根地址
-    LOCAL_STATIC_PATH: path.resolve(__dirname, '../src/static') // 静态文件的本地完整路径
+    COPY_PLUGIN_IGN: isDev ? [] : [], // 不复制的静态资源路径
+    SERVER_STATIC_SRC_PATH: isDev ? './src' : './assets/static', // 服务器展示的静态资源根地址
+    SERVER_STATIC_ROOT_PATH: isDev ? '.' : './assets/static', // 服务器展示的图片静态资源根地址
+    LOCAL_STATIC_PATH: path.resolve(__dirname, '../src/static'), // 静态文件的本地完整路径
+    DIST_STATIC_PATH: path.resolve(__dirname, '../src/static/dist') // 编译后的静态文件的本地完整路径
   },
   MOCKER: {
     MOCK_PORT: 4040

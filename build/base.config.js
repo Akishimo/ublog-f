@@ -99,7 +99,8 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'window.GLOABLE_CONFIG': JSON.stringify({
-        SERVER_STATIC_PATH: BUILD.SERVER_STATIC_PATH,
+        SERVER_STATIC_SRC_PATH: BUILD.SERVER_STATIC_SRC_PATH,
+        SERVER_STATIC_ROOT_PATH: BUILD.SERVER_STATIC_ROOT_PATH,
         STATIC_CONFIG: STATIC
       })
     }),

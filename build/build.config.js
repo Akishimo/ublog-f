@@ -26,7 +26,7 @@ const buildConfig = merge(baseConfig, {
     }),
     new CopyWebpackPlugin([ // dev模式采用 contentBase 指定静态资源
       {
-        from: BUILD.LOCAL_STATIC_PATH,
+        from: BUILD.DIST_STATIC_PATH,
         to: 'static',
         ignore: BUILD.COPY_PLUGIN_IGN
       }

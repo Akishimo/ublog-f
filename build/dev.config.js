@@ -31,7 +31,7 @@ const devConfig = merge(baseConfig, {
     },
     allowedHosts: [
       'ublog-b.com'
-    ],
+    ]
     // clientLogLevel: 'error'
   },
   devtool: BUILD.DEVTOOL
