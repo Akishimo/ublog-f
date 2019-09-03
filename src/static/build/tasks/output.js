@@ -1,19 +1,40 @@
 const gulp = require('gulp')
 const uglify = require('gulp-uglify')
-const babel = require('gulp-babel')
 const imagemin = require('gulp-imagemin')
 const cleanCSS = require('gulp-clean-css')
+const browserify = require('browserify')
+const buffer = require('vinyl-buffer')
+const source = require('vinyl-source-stream')
+const sourcemaps = require('gulp-sourcemaps')
+const babelify = require('babelify')
 // const gutil = require('gulp-util')
 
+// const outputJs = (cb) => {
+//   gulp.src('../src/gloable.js')
+//     .pipe(babel({
+//       'presets': ['@babel/preset-env']
+//     }))
+//     // .on('error', function(err) {
+//     //   gutil.log(gutil.colors.red('[Error]'), err.toString());
+//     // })
+//     .pipe(uglify())
+//     .pipe(gulp.dest('../dist'))
+//   cb()
+// }
+
 const outputJs = (cb) => {
-  gulp.src('../src/gloable.js')
-    .pipe(babel({
-      'presets': ['@babel/preset-env']
-    }))
-    // .on('error', function(err) {
-    //   gutil.log(gutil.colors.red('[Error]'), err.toString());
-    // })
+  browserify({
+    entries: '../src/gloable.js',
+    debug: true,
+    transform: [babelify.configure({
+      presets: ['@babel/preset-env']
+    })]
+  }).bundle()
+    .pipe(source('./gloable.js'))
+    .pipe(buffer())
+    .pipe(sourcemaps.init({ loadMaps: true }))
     .pipe(uglify())
+    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('../dist'))
   cb()
 }

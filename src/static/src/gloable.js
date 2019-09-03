@@ -5,7 +5,7 @@
  * @Last Modified time: 2019-09-03 17:39:09
  * @Description: 全局静态 js
  */
-// import throttle from './js/utils.js'
+import throttle from './js/utils.js'
 
 const path = window._GLOABLE.SERVER_STATIC_SRC_PATH
 const imgPath = window._GLOABLE.SERVER_STATIC_ROOT_PATH
@@ -16,19 +16,6 @@ const states = {
 }
 const staticProp = {
   bgEle: document.getElementById('pt-bg')
-}
-
-const throttle = window.throttle = function (func, delay) {
-  var prev = Date.now()
-  return function () {
-    var context = this
-    var args = arguments
-    var now = Date.now()
-    if (now - prev >= delay) {
-      func.apply(context, args)
-      prev = Date.now()
-    }
-  }
 }
 window.setAutoBg = (delay = 10000) => {
   setInterval(() => {
