@@ -2,19 +2,22 @@
  * @Author: Zhongyang Ren
  * @Date: 2019-09-01 14:20:35
  * @Last Modified by: Zhongyang Ren
- * @Last Modified time: 2019-09-02 16:29:58
+ * @Last Modified time: 2019-09-03 17:39:09
  * @Description: 全局静态 js
  */
+// import throttle from './js/utils.js'
+
 const path = window._GLOABLE.SERVER_STATIC_SRC_PATH
 const imgPath = window._GLOABLE.SERVER_STATIC_ROOT_PATH
 const states = {
   currentBgIndex: 0,
   isFirstLoad: true,
-  bgChangeMode: 'random'
+  bgChangeMode: localStorage.getItem('ublog.static.background.changemode') || 'random'
 }
 const staticProp = {
   bgEle: document.getElementById('pt-bg')
 }
+
 const throttle = window.throttle = function (func, delay) {
   var prev = Date.now()
   return function () {
@@ -38,6 +41,7 @@ window.setBgChangeMode = (mode = 'random') => {
     return
   }
   states.bgChangeMode = mode
+  localStorage.setItem('ublog.static.background.changemode', mode)
   console.log(`mode is set to ${mode} now`)
 }
 window.onload = () => {
@@ -56,17 +60,18 @@ const setRandomBg = (fixedIndex = 0, clearStorage = true) => {
         staticProp.bgEle.classList.remove('fadeout')
       }, delay)
     }
+    states.currentBgIndex = index
   }
 
   const storedBgIndex = localStorage.getItem('ublog.static.background.index')
-  if (storedBgIndex && !clearStorage) {
+  if (storedBgIndex && !clearStorage) { // 刷新页面使用缓存的图片index
     setItemBg(storedBgIndex)
     return
   }
 
-  let index = states.currentBgIndex
+  let index = states.currentBgIndex * 1
   const bgAmount = window._GLOABLE.STATIC_CONFIG.IMAGE_AMOUNT
-  while (index === states.currentBgIndex) {
+  while (index === states.currentBgIndex * 1) {
     if (fixedIndex === states.currentBgIndex && fixedIndex > 0) return
     switch (states.bgChangeMode) {
       case 'random':
@@ -79,7 +84,6 @@ const setRandomBg = (fixedIndex = 0, clearStorage = true) => {
         index = 1
     }
   }
-  states.currentBgIndex = index
   localStorage.setItem('ublog.static.background.index', index)
   setItemBg(index)
 }

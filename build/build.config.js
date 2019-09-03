@@ -24,11 +24,15 @@ const buildConfig = merge(baseConfig, {
     new webpack.optimize.RuntimeChunkPlugin({
       name: 'manifest'
     }),
-    new CopyWebpackPlugin([ // dev模式采用 contentBase 指定静态资源
+    new CopyWebpackPlugin([ // dev模式采用 contentBase 指定静态资源, 故不使用高插件
       {
         from: BUILD.DIST_STATIC_PATH,
         to: 'static',
         ignore: BUILD.COPY_PLUGIN_IGN
+      },
+      {
+        from: path.join(BUILD.DIST_STATIC_PATH, 'ublog.ico'),
+        to: '../'
       }
     ])
   ],
