@@ -1,28 +1,35 @@
+@import './commons/variables.less';
+
 html,
 body {
   margin: 0;
   padding: 0;
-  background-color: #000;
+  background-color: @black;
 }
+
 .absolute {
   position: absolute;
   width: 100%;
   height: 100%;
 }
+
 #pt-bg {
-  background-color: #000;
+  background-color: @black;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 50%;
   z-index: -999;
   transition: opacity 0.8s linear;
 }
+
 .fadeout {
   opacity: 0;
 }
+
 .block-event {
   pointer-events: none;
 }
+
 .allow-event {
   pointer-events: all;
 }

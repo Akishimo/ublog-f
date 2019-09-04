@@ -8,6 +8,7 @@ const source = require('vinyl-source-stream')
 const sourcemaps = require('gulp-sourcemaps')
 const babelify = require('babelify')
 const rev = require('gulp-rev')
+const less = require('gulp-less')
 
 const { BUILD } = require('../../../../config/index.js')
 
@@ -57,6 +58,24 @@ const outputJs = (cb) => {
   cb()
 }
 
+const outputLess = (cb) => {
+  gulp.src('../src/less/gloable.less')
+    .pipe(less())
+    .pipe(cleanCSS({ compatibility: 'ie9' }))
+    .pipe(rev())
+    .pipe(gulp.dest('../dist'))
+    .pipe(rev.manifest({ path: `../dist/${manifestName}`, merge: true }))
+    .pipe(gulp.dest('../dist'))
+  cb()
+}
+
+const outputLessForDev = (cb) => {
+  gulp.src('../src/less/gloable.less')
+    .pipe(less())
+    .pipe(gulp.dest('../src'))
+  cb()
+}
+
 const outputCss = (cb) => {
   gulp.src('../src/**/*.css')
     .pipe(cleanCSS({ compatibility: 'ie9' }))
@@ -99,8 +118,10 @@ const outputIcon = (cb) => {
 module.exports = {
   outputJs,
   outputCss,
+  outputLess,
   outputImages,
   outputJson,
   outputLib,
-  outputIcon
+  outputIcon,
+  outputLessForDev
 }
