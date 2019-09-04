@@ -1,4 +1,5 @@
 const path = require('path')
+const fs = require('fs')
 
 const webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
@@ -9,6 +10,28 @@ const StyleLintPlugin = require('stylelint-webpack-plugin')
 const { entries } = require('./utils')
 const { BUILD, STATIC } = require('../config/index')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+const getStaticFilename = () => {
+  const manifestPath = path.join(BUILD.DIST_STATIC_PATH, BUILD.STATIC_MANIFEST_FILENAME)
+  const filenameMap = {
+    JS: BUILD.STATIC_GLOABLE_JS_NAME,
+    CSS: BUILD.STATIC_GLOABLE_CSS_NAME
+  }
+  if (process.env.NODE_ENV === 'development') return filenameMap
+  if (fs.existsSync(manifestPath)) {
+    const manifestJson = fs.readFileSync(manifestPath).toString()
+    const manifestObj = JSON.parse(manifestJson)
+    Object.keys(manifestObj).map((key) => {
+      if (key === BUILD.STATIC_GLOABLE_JS_NAME) {
+        filenameMap['JS'] = manifestObj[key]
+      }
+      if (key === BUILD.STATIC_GLOABLE_CSS_NAME) {
+        filenameMap['CSS'] = manifestObj[key]
+      }
+    })
+  }
+  return filenameMap
+}
 
 const genHtmlConfig = () => {
   const plugins = []
@@ -101,7 +124,8 @@ module.exports = {
       'window.GLOABLE_CONFIG': JSON.stringify({
         SERVER_STATIC_SRC_PATH: BUILD.SERVER_STATIC_SRC_PATH,
         SERVER_STATIC_ROOT_PATH: BUILD.SERVER_STATIC_ROOT_PATH,
-        STATIC_CONFIG: STATIC
+        STATIC_CONFIG: STATIC,
+        STATIC_FILENAME: getStaticFilename()
       })
     }),
     ...genHtmlConfig()

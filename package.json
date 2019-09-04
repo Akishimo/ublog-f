@@ -6,7 +6,6 @@
     "type": "git",
     "url": "https://github.com/Akishimo/ublog-f.git"
   },
-  "main": "webpack.config.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --progress --config build/dev.config.js",
     "build": "npm run static && npm run buildpage",
@@ -16,8 +15,8 @@
     "lintjs": "eslint --ext .js --ext .vue --format 'node_modules/eslint-friendly-formatter' ./",
     "lintcss": "stylelint **/*.less **/*.css **/*.vue",
     "lint": "npm run lintjs & npm run lintcss",
-    "killmocker": "./kill.sh 4040",
-    "static": "gulp --gulpfile ./src/static/build/gulpfile.js"
+    "killmocker": "./shell/kill.sh 4040",
+    "static": "SOURCEMAP=true gulp --gulpfile ./src/static/build/gulpfile.js"
   },
   "keywords": [
     "blog"
@@ -52,6 +51,7 @@
     "gulp-babel": "^8.0.0",
     "gulp-clean-css": "^4.2.0",
     "gulp-imagemin": "^6.1.0",
+    "gulp-rev": "^9.0.0",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
     "gulp-util": "^3.0.8",
@@ -62,11 +62,13 @@
     "mini-css-extract-plugin": "^0.7.0",
     "mocker-api": "^1.8.1",
     "nodemon": "^1.19.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
     "portfinder": "^1.0.23",
     "stylelint": "^10.1.0",
     "stylelint-config-standard": "^18.3.0",
     "stylelint-order": "^3.0.1",
     "stylelint-webpack-plugin": "^0.10.5",
+    "terser-webpack-plugin": "^1.4.1",
     "uglifyjs-webpack-plugin": "^2.1.3",
     "url-loader": "^2.1.0",
     "vinyl-buffer": "^1.0.1",

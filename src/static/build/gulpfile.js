@@ -4,4 +4,4 @@ const { outputJs, outputCss, outputJson, outputImages, outputLib, outputIcon } =
 const clean = require('./tasks/clean.js')
 
 exports.clean = gulp.series(clean)
-exports.default = gulp.series(clean, gulp.parallel(outputJs, outputCss, outputJson, outputImages, outputLib, outputIcon))
+exports.default = gulp.series(clean, outputJs, outputCss, gulp.parallel(outputJson, outputImages, outputLib, outputIcon))

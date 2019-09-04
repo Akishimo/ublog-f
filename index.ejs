@@ -9,7 +9,7 @@
     <meta http-equiv="cache-control" content="no-cache">
     <link rel="icon" href="/ublog.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="/ublog.ico" type="image/x-icon"/>
-    <link rel="stylesheet" type="text/css" href="<%= window.GLOABLE_CONFIG.SERVER_STATIC_SRC_PATH %>/gloable.css" />
+    <link rel="stylesheet" type="text/css" href="<%= window.GLOABLE_CONFIG.SERVER_STATIC_SRC_PATH %>/<%= window.GLOABLE_CONFIG.STATIC_FILENAME.CSS %>" />
     <script>
       window._GLOABLE = <%= JSON.stringify(window.GLOABLE_CONFIG) %>
     </script>
@@ -23,5 +23,5 @@
     </div>
   </body>
   <script src="<%= window.GLOABLE_CONFIG.SERVER_STATIC_ROOT_PATH %>/lib/particles.min.js"></script>
-  <script src="<%= window.GLOABLE_CONFIG.SERVER_STATIC_SRC_PATH %>/gloable.js" type="module"></script>
+  <script src="<%= window.GLOABLE_CONFIG.SERVER_STATIC_SRC_PATH %>/<%= window.GLOABLE_CONFIG.STATIC_FILENAME.JS %>" type="module"></script>
 </html>
