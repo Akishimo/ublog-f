@@ -32,6 +32,8 @@
 
 ` npm run static ` 构建静态资源
 
+` npm run devless ` development 下构建并 watch static(非vue部分) 资源里的 less
+
 > 暂不支持 Windows 系统
 
 ## change background

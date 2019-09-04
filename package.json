@@ -7,7 +7,7 @@
     "url": "https://github.com/Akishimo/ublog-f.git"
   },
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --progress --config build/dev.config.js",
+    "dev": "WATCH=false gulp --gulpfile ./src/static/build/gulpfile.js devless && cross-env NODE_ENV=development webpack-dev-server --progress --config build/dev.config.js",
     "build": "npm run static && npm run buildpage",
     "buildpage": "cross-env NODE_ENV=production webpack --config build/build.config.js --progress --hide-modules",
     "mocker": "nodemon mocker/server.js",
@@ -16,7 +16,8 @@
     "lintcss": "stylelint **/*.less **/*.css **/*.vue",
     "lint": "npm run lintjs & npm run lintcss",
     "killmocker": "./shell/kill.sh 4040",
-    "static": "SOURCEMAP=true gulp --gulpfile ./src/static/build/gulpfile.js"
+    "static": "SOURCEMAP=true gulp --gulpfile ./src/static/build/gulpfile.js",
+    "devless": "WATCH=true gulp --gulpfile ./src/static/build/gulpfile.js devless"
   },
   "keywords": [
     "blog"
@@ -51,6 +52,7 @@
     "gulp-babel": "^8.0.0",
     "gulp-clean-css": "^4.2.0",
     "gulp-imagemin": "^6.1.0",
+    "gulp-less": "^4.0.1",
     "gulp-rev": "^9.0.0",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
