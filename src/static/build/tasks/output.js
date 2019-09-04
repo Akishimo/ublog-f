@@ -70,9 +70,17 @@ const outputLess = (cb) => {
 }
 
 const outputLessForDev = (cb) => {
-  gulp.src('../src/less/gloable.less')
+  if (process.env.WATCH === 'true') {
+    gulp.watch('../src/less/**/*.less', (cb) => {
+      gulp.src('../src/less/gloable.less')
+        .pipe(less())
+        .pipe(gulp.dest('../src'))
+    })
+  } else {
+    gulp.src('../src/less/gloable.less')
     .pipe(less())
     .pipe(gulp.dest('../src'))
+  }
   cb()
 }
 
