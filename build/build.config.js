@@ -4,6 +4,8 @@ const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const TerserJSPlugin = require('terser-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 const { BUILD } = require('../config/index')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -37,6 +39,7 @@ const buildConfig = merge(baseConfig, {
     ])
   ],
   optimization: {
+    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
     splitChunks: {
       cacheGroups: {
         vendor: {
