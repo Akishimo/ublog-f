@@ -7,6 +7,11 @@ const buffer = require('vinyl-buffer')
 const source = require('vinyl-source-stream')
 const sourcemaps = require('gulp-sourcemaps')
 const babelify = require('babelify')
+const rev = require('gulp-rev')
+
+const { BUILD } = require('../../../../config/index.js')
+
+const manifestName = BUILD.STATIC_MANIFEST_FILENAME
 // const gutil = require('gulp-util')
 
 // const outputJs = (cb) => {
@@ -23,7 +28,23 @@ const babelify = require('babelify')
 // }
 
 const outputJs = (cb) => {
-  browserify({
+  const handleJsStream = (stream) => {
+    const isSourcemap = process.env.SOURCEMAP === 'true'
+    if (isSourcemap) {
+      stream = stream.pipe(sourcemaps.init({ loadMaps: true }))
+    }
+    stream = stream.pipe(uglify())
+      .pipe(rev())
+      .pipe(gulp.dest('../dist'))
+    if (isSourcemap) {
+      stream = stream.pipe(sourcemaps.write('./')).pipe(gulp.dest('../dist'))
+    }
+    stream = stream.pipe(rev.manifest({ path: `../dist/${manifestName}`, merge: true }))
+      .pipe(gulp.dest('../dist'))
+    return stream
+  }
+
+  handleJsStream(browserify({
     entries: '../src/gloable.js',
     debug: true,
     transform: [babelify.configure({
@@ -31,10 +52,7 @@ const outputJs = (cb) => {
     })]
   }).bundle()
     .pipe(source('./gloable.js'))
-    .pipe(buffer())
-    .pipe(sourcemaps.init({ loadMaps: true }))
-    .pipe(uglify())
-    .pipe(sourcemaps.write('./'))
+    .pipe(buffer()))
     .pipe(gulp.dest('../dist'))
   cb()
 }
@@ -42,6 +60,9 @@ const outputJs = (cb) => {
 const outputCss = (cb) => {
   gulp.src('../src/**/*.css')
     .pipe(cleanCSS({ compatibility: 'ie9' }))
+    .pipe(rev())
+    .pipe(gulp.dest('../dist'))
+    .pipe(rev.manifest({ path: `../dist/${manifestName}`, merge: true }))
     .pipe(gulp.dest('../dist'))
   cb()
 }
