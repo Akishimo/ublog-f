@@ -1,3 +1,9 @@
+/*
+ * @Author: Zhongyang Ren
+ * @Date: 2019-09-04 10:40:04
+ * @Last Modified by: Zhongyang Ren
+ * @Last Modified time: 2019-09-04 10:53:58
+ */
 const throttle = window.throttle = function (func, delay) {
   var prev = Date.now()
   return function () {
