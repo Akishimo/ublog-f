@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a href="#/home">我是侧边栏 {{ count }}</a>
+    <a href="#/home">我是侧边栏</a>
     <router-view :key="activeDate"></router-view>
   </div>
 </template>
@@ -15,11 +15,6 @@ export default {
   watch: {
     '$route': function (to, from) {
       this.activeDate = new Date().getTime()
-    }
-  },
-  computed: {
-    count () {
-      return this.$store.state.count
     }
   }
 }
