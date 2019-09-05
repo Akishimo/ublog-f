@@ -1,3 +1,22 @@
 {
-  "presets": ["@babel/preset-env"]
+  "presets" : [
+    ["@babel/preset-env"
+      // {
+      // // "targets": {
+      // //   "browsers": [
+      // //     "last 2 versions",
+      // //     "not ie <= 9",
+      // //     "> 5%",
+      // //     "not dead"
+      // //   ]
+      // // },
+      //   "corejs": 2,
+      //   "debug": false,
+      //   "useBuiltIns": "usage"
+      // }
+    ]
+  ],
+  "plugins": [
+    // "@babel/plugin-transform-runtime" // 用了 webpack 的 splitchunks 功能, 先不用这个和 useBuiltIns, 写在这以备以后优化使用
+  ]
 }
