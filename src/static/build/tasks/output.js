@@ -9,6 +9,7 @@ const sourcemaps = require('gulp-sourcemaps')
 const babelify = require('babelify')
 const rev = require('gulp-rev')
 const less = require('gulp-less')
+const postcss = require('gulp-postcss')
 
 const { BUILD } = require('../../../../config/index.js')
 
@@ -61,8 +62,11 @@ const outputJs = (cb) => {
 const outputLess = (cb) => {
   gulp.src('../src/less/gloable.less')
     .pipe(less())
+    // .pipe(sourcemaps.init() )
+    .pipe(postcss([require('autoprefixer')]))
     .pipe(cleanCSS({ compatibility: 'ie9' }))
     .pipe(rev())
+    // .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('../dist'))
     .pipe(rev.manifest({ path: `../dist/${manifestName}`, merge: true }))
     .pipe(gulp.dest('../dist'))
@@ -74,6 +78,7 @@ const outputLessForDev = (cb) => {
     gulp.watch('../src/less/**/*.less', (cb) => {
       gulp.src('../src/less/gloable.less')
         .pipe(less())
+        // .pipe(postcss([require('autoprefixer')]))
         .pipe(gulp.dest('../src'))
     })
   } else {

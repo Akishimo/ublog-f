@@ -5,8 +5,8 @@ import routerConfig from './routers'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
-Vue.use(VueRouter)
 Vue.use(VueAxios, axios)
+Vue.use(VueRouter)
 
 const router = new VueRouter({
   // hashbang: true,
