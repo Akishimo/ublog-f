@@ -83,8 +83,8 @@ const outputLessForDev = (cb) => {
     })
   } else {
     gulp.src('../src/less/gloable.less')
-    .pipe(less())
-    .pipe(gulp.dest('../src'))
+      .pipe(less())
+      .pipe(gulp.dest('../src'))
   }
   cb()
 }
