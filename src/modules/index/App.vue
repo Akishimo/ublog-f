@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a href="#/login">我是侧边栏</a>
+    <a href="#/home">我是侧边栏</a>
     <router-view :key="activeDate"></router-view>
   </div>
 </template>
