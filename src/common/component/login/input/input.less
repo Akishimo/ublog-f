@@ -1,0 +1,24 @@
+@import '~@/common/style/variables.less';
+
+.login-input-wrapper {
+  display: block;
+  margin-bottom: .5rem;
+
+  .login-input {
+    .transparent-background(.3);
+
+    display: block;
+    width: 96%;
+    color: @login-input-text-color;
+    border: .01rem solid @white;
+    line-height: .5rem;
+    font-size: .25rem;
+    padding: 0 .1rem;
+    caret-color: @login-input-caret-color;
+    letter-spacing: 2px;
+
+    &:focus {
+      outline: @white;
+    }
+  }
+}

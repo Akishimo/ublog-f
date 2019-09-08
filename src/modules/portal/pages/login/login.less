@@ -1,11 +1,7 @@
 @import '~@/common/style/variables.less';
 
 .login-wrapper {
-  .center(7rem, 5rem);
-  .transparent-background(.7);
-
-  border-radius: 15px;
-  border: .01rem solid @login-btn-border;
+  .main-content-wrapper();
 
   .login-main {
     .center(5rem, 3rem);
@@ -13,23 +9,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-
-    .login-input {
-      .transparent-background(.3);
-
-      color: @login-input-text-color;
-      border: .01rem solid @white;
-      line-height: .5rem;
-      font-size: .25rem;
-      padding: 0 .1rem;
-      caret-color: @login-input-caret-color;
-      margin-bottom: .5rem;
-      letter-spacing: 2px;
-
-      &:focus {
-        outline: @white;
-      }
-    }
   }
 
   .disable-autocomplate {
