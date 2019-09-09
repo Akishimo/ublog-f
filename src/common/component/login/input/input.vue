@@ -1,6 +1,7 @@
 <template>
   <div class="login-input-wrapper">
-    <input class="login-input" :type="type" :placeholder="placeholder" autocomplete="off" />
+    <input class="login-input" :type="type" v-model="currentValue" :placeholder="placeholder" autocomplete="off" />
+    <label class="error-message">{{ errorMessage }}</label>
   </div>
 </template>
 
@@ -11,6 +12,7 @@ export default {
     }
   },
   props: {
+    value: String,
     placeholder: {
       type: String,
       default: ''
@@ -18,6 +20,20 @@ export default {
     type: {
       type: String,
       default: 'text'
+    },
+    errorMessage: {
+      type: String,
+      default: ''
+    }
+  },
+  computed: {
+    currentValue: {
+      get: function () {
+        return this.value
+      },
+      set: function (val) {
+        this.$emit('input', val)
+      }
     }
   }
 }
