@@ -5,8 +5,9 @@
  * @Last Modified time: 2019-09-04 15:55:10
  */
 
-import throttle from './common/utils.js'
+import utils from './common/utils.js'
 
+const { throttle, touchDbClick } = utils
 const imgPath = window._GLOABLE.SERVER_STATIC_ROOT_PATH
 const states = {
   currentBgIndex: 0,
@@ -79,10 +80,17 @@ const initListener = () => {
       runner()
     }
   }
+
+  // staticProp.bgEle.ondblclick = dbclickfunc
+  let tcrunner = touchDbClick(() => {
+    runner()
+  })
+  staticProp.bgEle.ontouchstart = tcrunner
+  staticProp.bgEle.onclick = tcrunner
 }
 
 const initNotice = () => {
-  console.log('press shift + c to change random background')
+  console.log('press shift + c or double click background to change random background')
 }
 
 const init = () => {

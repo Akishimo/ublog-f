@@ -20,7 +20,18 @@ module.exports = {
       "bottom",
       "left",
       "float"
-    ]
+    ],
+    "declaration-empty-line-before": [ "always", {
+      except: [
+        "after-declaration",
+        "first-nested",
+      ],
+      ignore: [
+        "after-comment",
+        "inside-single-line-block",
+      ],
+    }],
+    "number-leading-zero": "never"
     // "block-no-empty": null,
     // "color-no-invalid-hex": true,
     // "comment-empty-line-before": [ "always", {

@@ -17,4 +17,21 @@ const throttle = window.throttle = function (func, delay) {
   }
 }
 
-export default throttle
+const touchDbClick = window.touchDbClick = (func) => {
+  let clickTimes = 0
+  return () => {
+    clickTimes++
+    setTimeout(() => {
+      clickTimes = 0
+    }, 500)
+    if (clickTimes > 1) {
+      clickTimes = 0
+      func()
+    }
+  }
+}
+
+export default {
+  throttle,
+  touchDbClick
+}
