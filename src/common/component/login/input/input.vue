@@ -1,8 +1,10 @@
 <template>
-  <div class="login-input-wrapper">
-    <input class="login-input" :type="type" v-model="currentValue" :placeholder="placeholder" autocomplete="off" />
-    <label class="error-message">{{ errorMessage }}</label>
-  </div>
+  <validation-provider rules="secret" v-slot="{ errors }">
+    <div class="login-input-wrapper">
+      <input class="login-input" :type="type" v-model="currentValue" :placeholder="placeholder" autocomplete="off" />
+      <label class="error-message">{{ errors[0] }}</label>
+    </div>
+  </validation-provider>
 </template>
 
 <script>

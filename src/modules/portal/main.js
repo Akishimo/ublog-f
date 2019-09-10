@@ -1,13 +1,15 @@
 import Vue from 'vue'
-import App from './App'
 import VueRouter from 'vue-router'
-import routerConfig from './routers'
-import axios from 'axios'
 import VueAxios from 'vue-axios'
+import axios from 'axios'
+import App from './App'
+import routerConfig from './routers'
 import store from './store'
+import './rules'
 
 Vue.use(VueRouter)
 Vue.use(VueAxios, axios)
+// runRules()
 
 const router = new VueRouter({
   // hashbang: true,
