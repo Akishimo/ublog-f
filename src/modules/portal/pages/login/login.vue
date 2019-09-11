@@ -2,12 +2,14 @@
   <div class="login-wrapper">
     <div class="login-main">
       <input type="password" class="disable-autocomplate" />
-      <text-input :type="'text'" v-model="username" :placeholder="'username'" :error-message="err"></text-input>
-      <text-input :type="'password'" v-model="password" :placeholder="'password'"></text-input>
-      <div class="login-btn-wrapper">
-        <input type="button" value="REGISTER" @click="toRigster"/>
-        <input type="submit" value="ENTER" @click="test" />
-      </div>
+      <ValidationObserver v-slot="{ valid }">
+        <text-input :type="'text'" v-model="username" :placeholder="'username'" :rules-string="'required|min:5|max:20|login-username'"></text-input>
+        <text-input :type="'password'" v-model="password" :placeholder="'password'" :rules-string="'required|min:8|max:20|login-password'"></text-input>
+        <div class="login-btn-wrapper">
+          <input type="button" value="REGISTER" @click="toRigster"/>
+          <input type="submit" value="ENTER" @click="toLogin(valid)" />
+        </div>
+      </ValidationObserver>
     </div>
   </div>
 </template>
@@ -19,8 +21,7 @@ export default {
   data () {
     return {
       username: '',
-      password: '',
-      err: ''
+      password: ''
     }
   },
   created () {
@@ -39,8 +40,9 @@ export default {
       //   }
       // })
     },
-    test () {
-      console.log(this.password)
+    toLogin (valid) {
+      console.log(valid)
+      if (!valid) return
     }
   },
   components: {

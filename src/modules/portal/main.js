@@ -5,7 +5,7 @@ import axios from 'axios'
 import App from './App'
 import routerConfig from './routers'
 import store from './store'
-import './rules'
+import '@/common/validator.js'
 
 Vue.use(VueRouter)
 Vue.use(VueAxios, axios)

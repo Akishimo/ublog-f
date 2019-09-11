@@ -1,5 +1,5 @@
 <template>
-  <validation-provider rules="secret" v-slot="{ errors }">
+  <validation-provider :ref="placeholder" :rules="rulesString" :skipIfEmpty="false" :name="placeholder" v-slot="{ errors }" slim>
     <div class="login-input-wrapper">
       <input class="login-input" :type="type" v-model="currentValue" :placeholder="placeholder" autocomplete="off" />
       <label class="error-message">{{ errors[0] }}</label>
@@ -23,9 +23,9 @@ export default {
       type: String,
       default: 'text'
     },
-    errorMessage: {
+    rulesString: {
       type: String,
-      default: ''
+      default: 'required'
     }
   },
   computed: {
