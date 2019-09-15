@@ -2,6 +2,7 @@
 dist/
 src/static/dist/
 src/static/src/gloable.css
+package-lock.json
 
 # Logs
 logs
