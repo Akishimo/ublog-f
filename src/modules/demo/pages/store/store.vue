@@ -7,13 +7,13 @@
 </template>
 
 <script>
-import AJAX from '@/common/ajax'
+import API from '@/common/api'
 import { mapState, mapActions, mapGetters, mapMutations } from 'vuex'
 
 // const INC = 'increment'
 
 const getData = async (vm) => {
-  const response = await AJAX.call({
+  const response = await API.call({
     method: 'get',
     url: '/common/index/',
     data: {
@@ -88,5 +88,5 @@ export default {
 </script>
 
 <style lang="less">
-@import './home.less';
+@import './store.less';
 </style>
