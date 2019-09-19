@@ -2,8 +2,10 @@ const klaw = require('klaw')
 const path = require('path')
 const express = require('express')
 const apiMocker = require('mocker-api')
+const cookieParser = require('cookie-parser')
 
 const app = express()
+app.use(cookieParser())
 const { MOCKER: CONFIG } = require('../config/index')
 const apiDir = path.resolve(__dirname, `./apis`)
 

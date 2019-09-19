@@ -1,4 +1,6 @@
-const routers = [
+import VueRouter from 'vue-router'
+
+const routerConfig = [
   {
     path: '/home',
     name: 'home',
@@ -15,4 +17,8 @@ const routers = [
   }
 ]
 
-export default routers
+const router = new VueRouter({
+  routes: routerConfig
+})
+
+export default router

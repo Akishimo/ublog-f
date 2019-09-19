@@ -16,9 +16,18 @@ class API_WRAPPER {
       }
     }
     this.setPrefix(true)
+
+    Vue.axios.interceptors.response.use(res => {
+      if (res.data && res.data.code === 'need_login') {
+        location.href = 'portal.html'
+      }
+      return res
+    }, error => {
+      return Promise.reject(error)
+    })
   }
 
-  call (currentParams) {
+  async call (currentParams) {
     this.setPrefix()
     return Vue.axios(currentParams)
   }
