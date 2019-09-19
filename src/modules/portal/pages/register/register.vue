@@ -7,12 +7,18 @@
 </template>
 
 <script>
+import AJAX from '@/common/ajax'
+
 export default {
   data () {
     return {
     }
   },
-  created () {
+  async created () {
+    await AJAX.call({
+      method: 'get',
+      url: '/common/index'
+    })
   },
   computed: {
   },
@@ -21,12 +27,6 @@ export default {
       this.$router.push({
         name: 'register'
       })
-      // this.$router.push({
-      //   path: 'register',
-      //   query: {
-      //     aaa: '123'
-      //   }
-      // })
     }
   }
 }

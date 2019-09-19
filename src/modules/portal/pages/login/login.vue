@@ -15,9 +15,11 @@
 </template>
 
 <script>
-import TextInput from '@/common/component/login/input'
+import { mapState } from 'vuex'
 import APIS from '@/common/apis'
 import AJAX from '@/common/ajax'
+import TextInput from '@/common/component/login/input'
+import STORE_MUTATIONS from '../../store/constant'
 
 export default {
   data () {
@@ -27,30 +29,36 @@ export default {
     }
   },
   created () {
+    if (this.userInfo !== null) {
+      this.$router.push({
+        name: 'index'
+      })
+    }
   },
   computed: {
+    ...mapState([
+      'userInfo'
+    ])
   },
   methods: {
-    toRigster () {
+    async toRigster () {
       this.$router.push({
         name: 'register'
       })
-      // this.$router.push({
-      //   path: 'register',
-      //   query: {
-      //     aaa: '123'
-      //   }
-      // })
     },
     async toLogin () {
       const valid = await this.$refs.form.validate()
       if (!valid) return
       const response = await AJAX.call({
-        method: 'get',
-        url: APIS.LOGIN
+        method: 'post',
+        url: APIS.LOGIN,
+        data: {
+          username: this.username,
+          password: this.password
+        }
       })
       if (response.data.code === '1') {
-        console.log('login success', response.data)
+        this.$store.commit(STORE_MUTATIONS.SET_USER_INFO, response.data.data)
       }
     }
   },

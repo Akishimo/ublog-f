@@ -3,28 +3,13 @@ import VueRouter from 'vue-router'
 import VueAxios from 'vue-axios'
 import axios from 'axios'
 import App from './App'
-import routerConfig from './routers'
+import router from './router'
 import store from './store'
 import '@/common/validator.js'
 import '@/common/directives'
 
 Vue.use(VueRouter)
 Vue.use(VueAxios, axios)
-// runRules()
-
-const router = new VueRouter({
-  // hashbang: true,
-  // history: false,
-  // saveScrollPosition: true,
-  routes: routerConfig
-})
-
-// new Vue({
-//   el: '#app',
-//   template: '<App/>',
-//   components: { App }
-// })
-// router.start(App, '#app')
 
 new Vue({
   router,
