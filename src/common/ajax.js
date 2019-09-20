@@ -20,6 +20,7 @@ class API_WRAPPER {
     Vue.axios.interceptors.response.use(res => {
       if (res.data && res.data.code === 'need_login') {
         location.href = 'portal.html'
+        localStorage.removeItem('userInfo')
       }
       return res
     }, error => {
