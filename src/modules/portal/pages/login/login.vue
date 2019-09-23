@@ -59,6 +59,7 @@ export default {
       })
       if (response.data.code === '1') {
         this.$store.commit(STORE_MUTATIONS.SET_USER_INFO, response.data.data)
+        location.reload()
       }
     }
   },

@@ -26,6 +26,15 @@ class API_WRAPPER {
     }, error => {
       return Promise.reject(error)
     })
+
+    Vue.axios.interceptors.request.use(req => {
+      // if (!req.url.includes('common')) {
+      // TODO
+      // }
+      return req
+    }, error => {
+      return Promise.reject(error)
+    })
   }
 
   async call (currentParams) {

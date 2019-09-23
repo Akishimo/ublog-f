@@ -18,6 +18,7 @@ module.exports = delay({
         code: '1',
         data: account.info
       }
+      res.cookie('access_token', 'akishimo', { maxAge: 86400000, httpOnly: true })
     } else {
       result = {
         code: 0,
@@ -25,7 +26,6 @@ module.exports = delay({
         message: '用户名或密码错误'
       }
     }
-    res.cookie('access_token', 'akishimo', { maxAge: 86400000, httpOnly: true })
     return res.json(result)
   }
 }, 1000)
