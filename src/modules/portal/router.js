@@ -14,6 +14,13 @@ const routerConfig = [
     component (resolve) {
       require(['./pages/register/register'], resolve)
     }
+  },
+  {
+    path: '/index',
+    name: 'index',
+    component (resolve) {
+      require(['./pages/index/index'], resolve)
+    }
   }
 ]
 
