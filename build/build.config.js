@@ -39,7 +39,14 @@ const buildConfig = merge(baseConfig, {
     ])
   ],
   optimization: {
-    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
+    minimizer: [new TerserJSPlugin({
+      terserOptions: {
+        compress: {
+          drop_console: true
+        }
+      }
+    }), new OptimizeCSSAssetsPlugin({})],
+    minimize: true,
     splitChunks: {
       cacheGroups: {
         vendor: {
