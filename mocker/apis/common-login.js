@@ -1,4 +1,5 @@
 const delay = require('mocker-api/utils/delay')
+const Base64 = require('js-base64').Base64
 
 const account = {
   username: 'akishimo',
@@ -18,7 +19,7 @@ module.exports = delay({
         code: '1',
         data: account.info
       }
-      res.cookie('access_token', 'akishimo', { maxAge: 86400000, httpOnly: true })
+      res.cookie(Base64.encode('access_token'), Base64.encode('akishimo'), { maxAge: 86400000, httpOnly: true })
     } else {
       result = {
         code: 0,
