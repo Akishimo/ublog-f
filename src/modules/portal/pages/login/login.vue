@@ -18,8 +18,11 @@
 import { mapState } from 'vuex'
 import APIS from '@/common/apis'
 import AJAX from '@/common/ajax'
+import md5 from 'crypto-js/md5'
 import TextInput from '@/common/component/login/input'
 import STORE_MUTATIONS from '../../store/constant'
+
+const salt = 'tomoshibi' // 模拟盐值
 
 export default {
   data () {
@@ -54,7 +57,7 @@ export default {
         url: APIS.LOGIN,
         data: {
           username: this.username,
-          password: this.password
+          password: md5(`${salt}${this.password}`).toString()
         }
       })
       if (response.data.code === '1') {

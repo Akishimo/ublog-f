@@ -1,9 +1,10 @@
 const delay = require('mocker-api/utils/delay')
 const Base64 = require('js-base64').Base64
+const md5 = require("crypto-js/md5")
 
 const account = {
   username: 'akishimo',
-  password: 'Akishimo670708',
+  password: '57f9894653ae757255cd86f4997c3656',
   info: {
     username: 'akishimo',
     nickname: '闲潭梦落花',
