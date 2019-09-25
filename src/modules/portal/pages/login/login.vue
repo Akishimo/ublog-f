@@ -5,7 +5,7 @@
       <ValidationObserver ref="form" v-slot="{ valid }">
         <text-input type="text" v-model="username" placeholder="username" rules-string="required|min:5|max:20|login-username"></text-input>
         <text-input type="password" v-model="password" placeholder="password" rules-string="required|min:8|max:20|login-password"></text-input>
-        <div class="login-btn-wrapper">
+        <div class="btn-wrapper">
           <input type="button" value="REGISTER" v-throttle:1000="toRigster" />
           <input type="submit" value="ENTER" v-throttle="toLogin" />
         </div>

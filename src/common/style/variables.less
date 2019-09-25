@@ -44,4 +44,39 @@
 
   border-radius: 15px;
   border: .01rem solid @login-btn-border;
+
+  .disable-autocomplate {
+    position: absolute;
+    top: -9999px;
+  }
+
+  .btn-wrapper {
+    height: .8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    input {
+      background-color: @black;
+      color: @login-input-text-color;
+      border: .01rem solid @login-btn-border;
+      display: block;
+      width: 40%;
+      height: .6rem;
+      font-size: .2rem;
+      font-weight: bold;
+
+      &:focus {
+        outline: @login-btn-border;
+      }
+
+      &:hover {
+        background-color: @login-btn-hover;
+      }
+
+      &:active {
+        background-color: @login-btn-click;
+      }
+    }
+  }
 }
