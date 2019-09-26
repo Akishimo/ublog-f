@@ -37,15 +37,18 @@ router.beforeEach((to, from, next) => {
     if (store.state.userInfo) {
       next()
     } else {
-      // next({
-      //   name: 'login',
-      //   params: { redirect: to.fullPath }
-      // })
       location.href = `portal.html#/?redirect=` + to.fullPath
       location.reload()
     }
   } else {
-    next()
+    if (store.state.userInfo) {
+      next({
+        name: 'index'
+        // params: { redirect: to.fullPath }
+      })
+    } else {
+      next()
+    }
   }
 })
 

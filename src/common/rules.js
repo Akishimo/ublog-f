@@ -18,3 +18,11 @@ extend('login-password', {
   validate: value => /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])[\da-zA-Z]+$/.test(value),
   message: '{_field_} contains and must contain uppercase and lowercase letters and numbers'
 })
+
+extend('register-repassword', {
+  params: ['password'],
+  validate: (value, { password }) => {
+    return value === password
+  },
+  message: 'The {_field_} hahaha'
+})
