@@ -24,5 +24,5 @@ extend('register-repassword', {
   validate: (value, { password }) => {
     return value === password
   },
-  message: 'The {_field_} hahaha'
+  message: 'The {_field_} is not macth password'
 })

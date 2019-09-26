@@ -44,7 +44,7 @@ export default {
     ])
   },
   methods: {
-    async toRigster () {
+    toRigster () {
       this.$router.push({
         name: 'register'
       })

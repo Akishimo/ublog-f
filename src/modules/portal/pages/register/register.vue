@@ -7,6 +7,7 @@
         <text-input type="password" v-model="password" placeholder="password" rules-string="required|min:8|max:20|login-password"></text-input>
         <text-input type="password" v-model="repassword" placeholder="repeat password" :rules-string="'required|min:8|max:20|login-password|register-repassword:' + password "></text-input>
         <div class="btn-wrapper">
+          <input type="button" value="LOGIN" v-throttle:2000="toLogin" />
           <input type="button" value="REGISTER" v-throttle:2000="rigster" />
         </div>
       </ValidationObserver>
@@ -51,6 +52,11 @@ export default {
           name: 'login'
         })
       }
+    },
+    toLogin () {
+      this.$router.push({
+        name: 'login'
+      })
     }
   },
   components: {
