@@ -101,7 +101,7 @@ module.exports = {
         loader: 'vue-loader'
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.(png|jpg|gif|svg|eot|woff|woff2|ttf)$/,
         loader: 'url-loader',
         options: {
           name: '[name].[ext]?[hash]',
