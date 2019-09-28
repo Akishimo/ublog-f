@@ -1,3 +1,4 @@
 dist/
 node_modules/
 src/static/src/gloable.css
+/src/static/lib/

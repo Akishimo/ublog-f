@@ -1,3 +1,4 @@
 export default {
-  LOGIN: '/common/login'
+  LOGIN: '/common/login',
+  REGISTER: '/common/register'
 }

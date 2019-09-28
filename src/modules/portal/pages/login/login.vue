@@ -5,7 +5,7 @@
       <ValidationObserver ref="form" v-slot="{ valid }">
         <text-input type="text" v-model="username" placeholder="username" rules-string="required|min:5|max:20|login-username"></text-input>
         <text-input type="password" v-model="password" placeholder="password" rules-string="required|min:8|max:20|login-password"></text-input>
-        <div class="login-btn-wrapper">
+        <div class="btn-wrapper">
           <input type="button" value="REGISTER" v-throttle:1000="toRigster" />
           <input type="submit" value="ENTER" v-throttle="toLogin" />
         </div>
@@ -18,8 +18,11 @@
 import { mapState } from 'vuex'
 import APIS from '@/common/apis'
 import AJAX from '@/common/ajax'
+import md5 from 'crypto-js/md5'
 import TextInput from '@/common/component/login/input'
 import STORE_MUTATIONS from '../../store/constant'
+
+const salt = 'tomoshibi' // 模拟盐值
 
 export default {
   data () {
@@ -41,7 +44,7 @@ export default {
     ])
   },
   methods: {
-    async toRigster () {
+    toRigster () {
       this.$router.push({
         name: 'register'
       })
@@ -54,11 +57,14 @@ export default {
         url: APIS.LOGIN,
         data: {
           username: this.username,
-          password: this.password
+          password: md5(`${salt}${this.password}`).toString()
         }
       })
       if (response.data.code === '1') {
         this.$store.commit(STORE_MUTATIONS.SET_USER_INFO, response.data.data)
+        location.reload()
+      } else {
+        alert('login fail')
       }
     }
   },
