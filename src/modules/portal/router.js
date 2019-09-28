@@ -10,6 +10,13 @@ const routerConfig = [
     }
   },
   {
+    path: '/mlogin',
+    name: 'mlogin',
+    component (resolve) {
+      require(['./pages/mlogin/login'], resolve)
+    }
+  },
+  {
     path: '/register',
     name: 'register',
     component (resolve) {
